@@ -35,10 +35,18 @@ namespace ConsoleAppStor
             //    msg = queue.Get(null);
             //}
 
-            var table = new AzureTable(storageUrl);
+            //var table = new AzureTable(storageUrl);
 
-            table.Add("1", "Titulo 1");
-            var registro = table.Get("1");
+            //table.Add("1", "Titulo 1");
+            //var registro = table.Get("1");
+
+            var blob = new AzureBlob(storageUrl);
+
+            string localFile = "exemplo.txt";
+
+            blob.Add("arq.txt", localFile);
+            var text = blob.Get("arq.txt");
+
         }
     }
 }
