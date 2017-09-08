@@ -13,11 +13,11 @@ namespace ConsoleAppStor
         {
             var appSettings = new NetCoreConfiguration();
 
+            string redisUrl = appSettings.Get("redis-url");
             string storageUrl = appSettings.Get("storage-url");
-            string storageSecrets = appSettings.Get("storage-secrets");
+            string eventhubUrl = appSettings.Get("eventhub-url");
 
             Console.WriteLine($"Setting [storageUrl] = '{storageUrl}'");
-            Console.WriteLine($"Setting [storageSecrets] = '{storageSecrets}'");
 
             //var redis = new RedisComponent();
 
@@ -40,12 +40,12 @@ namespace ConsoleAppStor
             //table.Add("1", "Titulo 1");
             //var registro = table.Get("1");
 
-            var blob = new AzureBlob(storageUrl);
+            //var blob = new AzureBlob(storageUrl);
 
-            string localFile = "exemplo.txt";
+            //string localFile = "exemplo.txt";
 
-            blob.Add("arq.txt", localFile);
-            var text = blob.Get("arq.txt");
+            //blob.Add("arq.txt", localFile);
+            //var text = blob.Get("arq.txt");
 
         }
     }
