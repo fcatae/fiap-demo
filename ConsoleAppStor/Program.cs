@@ -18,6 +18,22 @@ namespace ConsoleAppStor
 
             Console.WriteLine($"Setting [storageUrl] = '{storageUrl}'");
             Console.WriteLine($"Setting [storageSecrets] = '{storageSecrets}'");
+
+            //var redis = new RedisComponent();
+            var queue = new AzureQueue(storageUrl, "exemplo");
+
+            queue.Add(null, "contando...");
+            queue.Add(null, "1");
+            queue.Add(null, "2");
+            queue.Add(null, "3");
+            
+            var msg = queue.Get(null);
+
+            while(msg != null)
+            {
+                msg = queue.Get(null);
+            }
+
         }
     }
 }
