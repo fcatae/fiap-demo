@@ -11,14 +11,13 @@ namespace ConsoleAppStor
     {
         static void Main(string[] args)
         {
-            var appSettings = ConfigurationManager.AppSettings;
-            
-            foreach (var key in appSettings.AllKeys)
-            {
-                string value = appSettings[key];
+            var appSettings = new NetCoreConfiguration();
 
-                Console.WriteLine($"Setting [{key}] = '{value}'");
-            }
+            string storageUrl = appSettings.Get("storage-url");
+            string storageSecrets = appSettings.Get("storage-secrets");
+
+            Console.WriteLine($"Setting [storageUrl] = '{storageUrl}'");
+            Console.WriteLine($"Setting [storageSecrets] = '{storageSecrets}'");
         }
     }
 }
