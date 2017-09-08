@@ -20,20 +20,25 @@ namespace ConsoleAppStor
             Console.WriteLine($"Setting [storageSecrets] = '{storageSecrets}'");
 
             //var redis = new RedisComponent();
-            var queue = new AzureQueue(storageUrl, "exemplo");
 
-            queue.Add(null, "contando...");
-            queue.Add(null, "1");
-            queue.Add(null, "2");
-            queue.Add(null, "3");
-            
-            var msg = queue.Get(null);
+            //var queue = new AzureQueue(storageUrl, "exemplo");
 
-            while(msg != null)
-            {
-                msg = queue.Get(null);
-            }
+            //queue.Add(null, "contando...");
+            //queue.Add(null, "1");
+            //queue.Add(null, "2");
+            //queue.Add(null, "3");
 
+            //var msg = queue.Get(null);
+
+            //while(msg != null)
+            //{
+            //    msg = queue.Get(null);
+            //}
+
+            var table = new AzureTable(storageUrl);
+
+            table.Add("1", "Titulo 1");
+            var registro = table.Get("1");
         }
     }
 }
