@@ -47,6 +47,27 @@ namespace ConsoleAppStor
             //blob.Add("arq.txt", localFile);
             //var text = blob.Get("arq.txt");
 
+            var eventHub = new EventHubSender(eventhubUrl);
+            var eventReceiver = new EventHubReceiver(eventhubUrl, "client01");
+
+            eventHub.Add("client01", "Hello world");
+            eventHub.Add("client01", "Hello world 2");
+            eventHub.Add("client01", "Hello world3");
+
+            while (true)
+            {
+                var msg = eventReceiver.Get(null);
+
+                if (msg != null)
+                {
+                    Console.WriteLine($"Msg: {msg}");
+                }
+                else
+                {
+                    Task.Delay(1000).Wait();
+                }
+            }
+
         }
     }
 }
