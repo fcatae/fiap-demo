@@ -19,7 +19,9 @@ namespace ConsoleAppStor
 
             Console.WriteLine($"Setting [storageUrl] = '{storageUrl}'");
 
-            //var redis = new RedisComponent();
+            var redis = new RedisComponent(redisUrl);
+            redis.Add("exemplo1", "ola");
+            var r = redis.Get("exemplo1");
 
             //var queue = new AzureQueue(storageUrl, "exemplo");
 
