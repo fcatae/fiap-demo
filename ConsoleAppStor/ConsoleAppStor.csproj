@@ -107,8 +107,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfiguration.cs" />
-    <Compile Include="EventHubReceiver.cs" />
-    <Compile Include="EventHubSender.cs" />
+    <Compile Include="Storages\EventHubReceiver.cs" />
+    <Compile Include="Storages\EventHubSender.cs" />
     <Compile Include="Storages\AzureBlob.cs" />
     <Compile Include="Storages\AzureTable.cs" />
     <Compile Include="Storages\AzureQueue.cs" />
