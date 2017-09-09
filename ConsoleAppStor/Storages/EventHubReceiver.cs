@@ -28,7 +28,7 @@ namespace ConsoleAppStor
 
             foreach (string partitionId in partitionList)
             {
-                var receiver = client.CreateReceiver("teste", partitionId, PartitionReceiver.EndOfStream);
+                var receiver = client.CreateReceiver("$default", partitionId, PartitionReceiver.EndOfStream);
                 receiver.SetReceiveHandler(this);
             }
         }
