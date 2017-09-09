@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace ConsoleAppStor
     class EventHubReceiver : ISource, IPartitionReceiveHandler
     {
         private EventHubClient _client;
-        Queue<EventData> _pendingMessages = new Queue<EventData>();
+        ConcurrentQueue<EventData> _pendingMessages = new ConcurrentQueue<EventData>();
 
         public EventHubReceiver(string connectionString, string partitionKey)
         {
@@ -36,12 +37,14 @@ namespace ConsoleAppStor
 
         public string Get(string key)
         {
-            if (_pendingMessages.Count == 0)
-                return null;
+            string result = null;
 
-            var message = _pendingMessages.Dequeue();
+            if(_pendingMessages.TryDequeue(out EventData message))
+            {
+                result = Encoding.UTF8.GetString(message.Body.Array, message.Body.Offset, message.Body.Count);
+            }
 
-            return Encoding.UTF8.GetString(message.Body.Array, message.Body.Offset, message.Body.Count);
+            return result;
         }
 
         public Task ProcessErrorAsync(Exception error)
